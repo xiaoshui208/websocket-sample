@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8"> 
+<title> Websockt test  </title>  
+
+<script>
+
+function test(){
+
+   if ("WebSocket" in window)
+   {
+
+    alert("您的浏览器支持 WebSocket!");
+
+  var ws = new WebSocket("ws://localhost:8080/reverse");
+
+  alert("alert test");
+
+                ws.onopen = function()
+               {
+                  // Web Socket 已连接上，使用 send() 方法发送数据 web/count
+                  ws.send("发送数据");
+                  alert("数据发送中...");
+               };
+                
+               ws.onmessage = function (evt) 
+               { 
+                  var received_msg = evt.data;
+
+                    alert(received_msg);
+                  alert("数据已接收..." + received_msg);
+               };
+                
+               ws.onclose = function()
+               { 
+                  // 关闭 websocket
+                  alert("连接已关闭..."); 
+               };
+    }
+
+}
+
+
+</script>
+
+</head>
+
+
+
+<body>
+<input type="button" value="open" onclick="test()"/>
+
+
+</body>
+
+</html>
